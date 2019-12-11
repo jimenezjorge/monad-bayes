@@ -16,6 +16,7 @@ module Control.Monad.Bayes.Inference.PMMH (
 import Numeric.Log
 
 import Control.Monad.Trans (lift)
+import Control.Monad.Fail (MonadFail)
 
 import Control.Monad.Bayes.Class
 import Control.Monad.Bayes.Sequential
@@ -24,7 +25,7 @@ import Control.Monad.Bayes.Traced
 import Control.Monad.Bayes.Inference.SMC
 
 -- | Particle Marginal Metropolis-Hastings.
-pmmh :: MonadInfer m
+pmmh :: (MonadInfer m, MonadFail m)
      => Int -- ^ number of MH steps
      -> Int -- ^ number of time steps
      -> Int -- ^ number of particles
